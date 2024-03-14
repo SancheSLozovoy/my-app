@@ -18,23 +18,26 @@ form{
   flex-direction: column;
 }
 
-.App-header__textArea{
-  resize: none;
-  width: 450px;
-  height: 50px;
-  margin-bottom: 35px;
-  border-radius: 20px;
+.App-header__input{
   font-size: 18px;
-  color: rgba(167, 114, 67, 1);
-  white-space: pre;
+  font-family: JostL;
+  display: block;
+  border-radius: 20px;
+  padding: 13px 16px;
+  width: 450px;
+  height: 30px;
+  margin-top: 8px;
+  resize: none;
+  margin-bottom: 35px;
+  border: none;
+  background-color: rgba(217, 217, 217, 1);
 }
 
-.App-header__textArea::placeholder{
-  display: inline-block;
-  color: rgba(167, 114, 67, 1) ;
-  padding-left: 28px;
-  padding-top: 12px;
+.App-header__input::placeholder{
+  color:rgba(167, 114, 67, 1);
+  font-size: 18px;
   font-family: JostL;
+  line-height: 160%;
 }
 
 .App {
@@ -76,7 +79,7 @@ form{
 
 .App-header__button{
   background-color: rgba(167, 114, 67, 1);
-  width: 456px;
+  width: 484px;
   height: 58px;
   border: none;
   border-radius: 20px;
