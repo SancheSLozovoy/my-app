@@ -1,0 +1,135 @@
+@font-face {
+    font-family: 'Jost';
+    src: url('../font/static/Jost-Regular.ttf');
+  }
+  
+  @font-face {
+    font-family: 'JostL';
+    src: url('../font/static/Jost-Light.ttf');
+  }
+  
+  @font-face {
+    font-family: 'JostB';
+    src: url('../font/static/Jost-Bold.ttf');
+  }
+  
+  form{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .Register-header__arrow{
+    margin-bottom: 35px;
+  }
+
+  .Register-header__arrow:hover{
+    background-color: rgba(167, 114, 67, 1);
+    border-radius: 99%;
+    transition: 0.2s;
+  }
+  .Register-header__input{
+    font-size: 18px;
+    font-family: JostL;
+    display: block;
+    border-radius: 20px;
+    padding: 13px 16px;
+    width: 450px;
+    height: 30px;
+    resize: none;
+    margin-bottom: 35px;
+    border: none;
+    background-color: rgba(217, 217, 217, 1);
+  }
+  
+  .Register-header__input::placeholder{
+    color:rgba(167, 114, 67, 1);
+    font-size: 18px;
+    font-family: JostL;
+    line-height: 160%;
+  }
+  
+  .Register {
+    text-align: center;
+    font-family: Jost;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .Register-header__img {
+    height: 150px;
+    pointer-events: none;
+  }
+  
+  .Register-header__error{
+    font-family: JostL;
+    margin-top: 0px;
+    font-size: 18px;
+  }
+
+  .Register-header__form{
+    margin-top: 0px;
+    margin-bottom: 35px;
+    position: relative;
+  }
+  
+  .Register-header__text{
+    font-size: 64px;
+    font-family: Jost;
+  }
+  
+  .Register-header__noAcc{
+    display: flex;
+    flex-direction: row;
+    font-family: JostL;
+  }
+  
+  .Register-header__noAcc-p{
+    font-weight: lighter;
+    font-size: 18px;
+    margin: 0px;
+  }
+  
+  .Register-header__noAcc-link{
+    color: rgba(167, 114, 67, 1);
+    text-decoration: none;
+    margin-left: 15px;
+  }
+  
+  .Register-header__button{
+    background-color: rgba(167, 114, 67, 1);
+    width: 484px;
+    height: 58px;
+    border: none;
+    border-radius: 20px;
+    font-size: 18px;
+    color: rgba(217, 217, 217, 1);
+    font-weight:bolder;
+    font-family: JostB;
+  }
+  
+  .Register-header__button:hover{
+    background-color: rgba(139, 97, 60, 1);
+    transition: 0.3s;
+  }
+  
+  .Register-header {
+    background-color: rgba(54, 45, 46, 1);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  
+  
+  @keyframes Register-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  

@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Jost';
-  src: url('../font/static/Jost-Black.ttf');
+  src: url('../font/static/Jost-Regular.ttf');
 }
 
 @font-face {
@@ -11,6 +11,11 @@
 @font-face {
   font-family: 'JostB';
   src: url('../font/static/Jost-Bold.ttf');
+}
+
+#root{
+    margin: 0;
+    padding: 0;
 }
 
 form{
@@ -56,7 +61,7 @@ form{
 
 .App-header__text{
   font-size: 64px;
-  font-weight: bold;
+  font-weight: 400px;
 }
 
 .App-header__noAcc{
