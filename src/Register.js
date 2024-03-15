@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import logo from './Group 1.svg';
 import arrow from './arrow.svg';
 import './Register.css';
-import InputMask from 'react-input-mask';
 import { useHistory } from 'react-router-dom';
 
 export default function Register() {
@@ -67,19 +66,7 @@ export default function Register() {
                 required 
             />
             {passwordError && <p className="Register-header__error">{passwordError} </p>}
-            <InputMask 
-                className='Register-header__input'
-                mask="+7(999)999-99-99" 
-                placeholder="Номер телефона"
-                required 
-            />
-                <button onClick={() => history.goBack()} type='submit' className='Register-header__button'>
-                Зарегистрироваться
-            </button> 
-            <span 
-                className='App-header__back-arrow' 
-                onClick={() => history.goBack()}
-            ></span>
+                <button type='submit' className='Register-header__button'>Зарегистрироваться</button>
             </form>
         </div>
       </header>
