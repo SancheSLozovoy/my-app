@@ -65,8 +65,20 @@ body{
 .body__info > * {
     margin-bottom: 20px;
 }
+.body__info-button{
+    color: rgba(167, 114, 67, 1);
+    font-size: 18px;
+}
+
+.body__info-button-password{
+    background-color: rgba(217, 217, 217, 1);
+    border: none;
+    font-size: 18px;
+    color: rgba(167, 114, 67, 1);
+}
 
 .body__info-img{
+    vertical-align: middle;
     background-color: grey;
     width: 250px;
     height: 250px;
@@ -135,4 +147,22 @@ body{
     height: 74px;
     background-color: rgba(217, 217, 217, 1);
     border-radius: 15px;
+}
+
+.star__button{
+    color: rgba(217, 217, 217, 1);
+    font-size: 18px;
+    border-radius: 20px;
+    background-color: rgba(167, 114, 67, 1);
+    border: none;
+    width: 300px;
+    height: 70px;
+    transition: 0.3s ease;
+}
+
+.star__button:hover {
+    background-color: rgb(194, 133, 80);
+    box-shadow: 0 0 10px rgb(194, 133, 80); 
+    transform: scale(1.1); 
+    transition:  0.3s ease;
 }

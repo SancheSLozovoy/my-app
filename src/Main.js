@@ -1,24 +1,29 @@
-import './Main.css';
 import React, { useState, useEffect } from 'react';
 import Layout from './Layout';
+import { format, addSeconds } from 'date-fns';
 
 const Main = () => {
   const [time, setTime] = useState(0);
   const [currentDate, setCurrentDate] = useState('');
+  const [gameStarted, setGameStarted] = useState(false);
 
   useEffect(() => {
     // Update current date when the component mounts
     updateCurrentDate();
+  }, []);
 
-    // Start the timer
-    const timer = setInterval(() => {
-      // Increment time by 1 second
-      setTime(prevTime => prevTime + 1);
-    }, 1000); // 1000 milliseconds = 1 second
+  useEffect(() => {
+    // Start the timer if the game has started
+    if (gameStarted) {
+      const timer = setInterval(() => {
+        // Increment time by 1 second
+        setTime(prevTime => prevTime + 1);
+      }, 1000); // 1000 milliseconds = 1 second
 
-    // Cleanup function to clear the interval when the component unmounts
-    return () => clearInterval(timer);
-  }, []); // Empty dependency array means this effect runs only once after the initial render
+      // Cleanup function to clear the interval when the component unmounts or when the game ends
+      return () => clearInterval(timer);
+    }
+  }, [gameStarted]);
 
   // Function to update the current date
   const updateCurrentDate = () => {
@@ -38,22 +43,31 @@ const Main = () => {
     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   };
 
+  const handleStartGame = () => {
+    setGameStarted(true);
+  };
+
+  const gameContainer = (
+    <div className='main__info-container'>
+      <div className='main__info'>
+        <div className='main__info-date'>Время игры: {formatTime()}</div>
+        <div className='main__info-date'>Дата игры: {currentDate}</div>
+        <div className='main__info-img'>
+          543543543
+        </div>
+        <div className='main__info-title'>Cлово</div>
+        <div className='main__word-container'>
+            
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <Layout>
       <div className="Main">
-        <div className='main__info-container'>
-          <div className='main__info'>
-            <div className='main__info-date'>Время игры: {formatTime()}</div>
-            <div className='main__info-date'>Дата игры: {currentDate}</div>
-            <div className='main__info-img'>
-              543543543
-            </div>
-            <div className='main__info-title'>Cлово</div>
-            <div className='main__word-container'>
-              {/* Add your word container content here */}
-            </div>
-          </div>
-        </div>
+        {!gameStarted && <button onClick={handleStartGame} className='star__button'>Начать</button>}
+        {gameStarted && gameContainer}
       </div>
     </Layout>
   );
