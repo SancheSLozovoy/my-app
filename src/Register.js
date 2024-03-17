@@ -1,13 +1,12 @@
+// Register.js
 import React, { useState } from 'react';
 import logo from './Group 1.svg';
 import arrow from './arrow.svg';
 import './Register.css';
 import { useHistory } from 'react-router-dom';
 
-export default function Register() {
-
+const Register = () => {
   const history = useHistory();
-
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
@@ -27,50 +26,53 @@ export default function Register() {
 
     if (password !== confirmPassword) {
       setPasswordError('Пароли не совпадают');
-    } 
+    } else {
+      history.push('/profile');
+    }
   };
 
   return (
     <div className="Register">
       <header className="Register-header">
         <img src={logo} className="Register-header__img" alt="logo" />
-        <p className='Register-header__text' >
+        <p className='Register-header__text'>
           Регистрация
         </p>
         <div className='Register-header__formArrow'>
-            <span className='Registet-header__span'>
-                <img onClick={() => history.goBack()} className='Register-header__arrow' src={arrow}/>
-            </span>
-            <form className='Register-header__form' onSubmit={handleSubmit}>
+          <span className='Registet-header__span'>
+            <img onClick={() => history.goBack()} className='Register-header__arrow' src={arrow} alt="arrow" />
+          </span>
+          <form className='Register-header__form' onSubmit={handleSubmit}>
             <input 
-                className='Register-header__input' 
-                placeholder='Логин' 
-                required 
+              className='Register-header__input' 
+              placeholder='Логин' 
+              required 
             />
             <input 
-                className='Register-header__input' 
-                placeholder='Пароль' 
-                type='password' 
-                minLength={8} 
-                value={password}
-                onChange={handlePasswordChange}
-                required 
+              className='Register-header__input' 
+              placeholder='Пароль' 
+              type='password' 
+              minLength={8} 
+              value={password}
+              onChange={handlePasswordChange}
+              required 
             />
             <input 
-                className='Register-header__input' 
-                placeholder='Повторите пароль' 
-                type='password' 
-                minLength={8} 
-                value={confirmPassword}
-                onChange={handleConfirmPasswordChange}
-                required 
+              className='Register-header__input' 
+              placeholder='Повторите пароль' 
+              type='password' 
+              minLength={8} 
+              value={confirmPassword}
+              onChange={handleConfirmPasswordChange}
+              required 
             />
-            {passwordError && <p className="Register-header__error">{passwordError} </p>}
-                <button type='submit' className='Register-header__button'>Зарегистрироваться</button>
-            </form>
+            {passwordError && <p className="Register-header__error">{passwordError}</p>}
+            <button type='submit' className='Register-header__button'>Зарегистрироваться</button>
+          </form>
         </div>
       </header>
     </div>
   );
-}
+};
 
+export default Register;
