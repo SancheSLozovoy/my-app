@@ -36,7 +36,7 @@ const Profile = () => {
               Рейтинг: {rating}
             </div>
             <div className='body__info-img'>
-              <img src={avatar} className='body__info-img' />
+              <img src={avatar} className='body__info-img'/>
             </div>
             <input type="file" accept="image/*" onChange={changeAvatar} className='body__info-button' content='Изменить аватар' />
             <div className='body__info-login-container'>
