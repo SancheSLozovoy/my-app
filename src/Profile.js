@@ -38,7 +38,15 @@ const Profile = () => {
             <div className='body__info-img'>
               <img src={avatar} className='body__info-img'/>
             </div>
-            <input type="file" accept="image/*" onChange={changeAvatar} className='body__info-button' content='Изменить аватар' />
+            <label htmlFor="avatarInput" className="body__info-button">
+                Изменить аватар
+                <input
+                    id="avatarInput"
+                    type="file"
+                    accept="image/*"
+                    onChange={changeAvatar}
+                />
+            </label>    
             <div className='body__info-login-container'>
               <div className='body__info-login'>Логин: {login}</div>
             </div>
