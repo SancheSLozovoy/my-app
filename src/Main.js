@@ -111,60 +111,61 @@ const Main = () => {
 
   const renderHangman = () => {
     switch (hangmanCondition) {
-      case 1:
-        return (
-          <>
-            <circle cx="280" cy="140" r="40" />
-          </>
-        );
-      case 2:
-        return (
-          <>
-            <circle cx="280" cy="140" r="40" />
-            <line x1="280" y1="180" x2="280" y2="290" />
-          </>
-        );
-      case 3:
-        return (
-          <>
-            <circle cx="280" cy="140" r="40" />
-            <line x1="280" y1="180" x2="280" y2="290" />
-            <line x1="280" y1="230" x2="200" y2="180" />
-          </>
-        );
-      case 4:
-        return (
-          <>
-            <circle cx="280" cy="140" r="40" />
-            <line x1="280" y1="180" x2="280" y2="290" />
-            <line x1="280" y1="230" x2="200" y2="180" />
-            <line x1="280" y1="230" x2="360" y2="180" />
-          </>
-        );
-      case 5:
-        return (
-          <>
-            <circle cx="280" cy="140" r="40" />
-            <line x1="280" y1="180" x2="280" y2="290" />
-            <line x1="280" y1="230" x2="200" y2="180" />
-            <line x1="280" y1="230" x2="360" y2="180" />
-            <line x1="280" y1="290" x2="220" y2="420" />
-          </>
-        );
-      case 6:
-        return (
-          <>
-            <circle cx="280" cy="140" r="40" />
-            <line x1="280" y1="180" x2="280" y2="290" />
-            <line x1="280" y1="230" x2="200" y2="180" />
-            <line x1="280" y1="230" x2="360" y2="180" />
-            <line x1="280" y1="290" x2="220" y2="420" />
-            <line x1="280" y1="290" x2="340" y2="420" />
-          </>
-        );
-      default:
-        return null;
-    }
+        case 1:
+          return (
+            <>
+              <circle cx="280" cy="140" r="40" stroke-width="10"/>
+            </>
+          );
+        case 2:
+          return (
+            <>
+              <circle cx="280" cy="140" r="40" stroke-width="10"/>
+              <line x1="280" y1="180" x2="280" y2="290" stroke-width="10" /> {/* Увеличиваем толщину линии */}
+            </>
+          );
+        case 3:
+          return (
+            <>
+              <circle cx="280" cy="140" r="40" stroke-width="10"/>
+              <line x1="280" y1="180" x2="280" y2="290" stroke-width="10" />
+              <line x1="280" y1="230" x2="200" y2="180" stroke-width="10" /> {/* Увеличиваем толщину линии */}
+            </>
+          );
+        case 4:
+          return (
+            <>
+              <circle cx="280" cy="140" r="40" stroke-width="10"/>
+              <line x1="280" y1="180" x2="280" y2="290" stroke-width="10" />
+              <line x1="280" y1="230" x2="200" y2="180" stroke-width="10" />
+              <line x1="280" y1="230" x2="360" y2="180" stroke-width="10" /> {/* Увеличиваем толщину линии */}
+            </>
+          );
+        case 5:
+          return (
+            <>
+              <circle cx="280" cy="140" r="40" stroke-width="10"/>
+              <line x1="280" y1="180" x2="280" y2="290" stroke-width="10" />
+              <line x1="280" y1="230" x2="200" y2="180" stroke-width="10" />
+              <line x1="280" y1="230" x2="360" y2="180" stroke-width="10" />
+              <line x1="280" y1="290" x2="220" y2="420" stroke-width="10" /> {/* Увеличиваем толщину линии */}
+            </>
+          );
+        case 6:
+          return (
+            <>
+              <circle cx="280" cy="140" r="40" stroke-width="10"/>
+              <line x1="280" y1="180" x2="280" y2="290" stroke-width="10" />
+              <line x1="280" y1="230" x2="200" y2="180" stroke-width="10" />
+              <line x1="280" y1="230" x2="360" y2="180" stroke-width="10" />
+              <line x1="280" y1="290" x2="220" y2="420" stroke-width="10" />
+              <line x1="280" y1="290" x2="340" y2="420" stroke-width="10" /> {/* Увеличиваем толщину линии */}
+            </>
+          );
+        default:
+          return null;
+      }
+      
   };
 
   return (
