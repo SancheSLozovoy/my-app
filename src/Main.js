@@ -121,7 +121,7 @@ const Main = () => {
           return (
             <>
               <circle cx="280" cy="140" r="40" stroke-width="10"/>
-              <line x1="280" y1="180" x2="280" y2="290" stroke-width="10" /> {/* Увеличиваем толщину линии */}
+              <line x1="280" y1="180" x2="280" y2="290" stroke-width="10" /> 
             </>
           );
         case 3:
@@ -129,7 +129,7 @@ const Main = () => {
             <>
               <circle cx="280" cy="140" r="40" stroke-width="10"/>
               <line x1="280" y1="180" x2="280" y2="290" stroke-width="10" />
-              <line x1="280" y1="230" x2="200" y2="180" stroke-width="10" /> {/* Увеличиваем толщину линии */}
+              <line x1="280" y1="230" x2="200" y2="180" stroke-width="10" /> 
             </>
           );
         case 4:
@@ -138,7 +138,7 @@ const Main = () => {
               <circle cx="280" cy="140" r="40" stroke-width="10"/>
               <line x1="280" y1="180" x2="280" y2="290" stroke-width="10" />
               <line x1="280" y1="230" x2="200" y2="180" stroke-width="10" />
-              <line x1="280" y1="230" x2="360" y2="180" stroke-width="10" /> {/* Увеличиваем толщину линии */}
+              <line x1="280" y1="230" x2="360" y2="180" stroke-width="10" /> 
             </>
           );
         case 5:
@@ -148,7 +148,7 @@ const Main = () => {
               <line x1="280" y1="180" x2="280" y2="290" stroke-width="10" />
               <line x1="280" y1="230" x2="200" y2="180" stroke-width="10" />
               <line x1="280" y1="230" x2="360" y2="180" stroke-width="10" />
-              <line x1="280" y1="290" x2="220" y2="420" stroke-width="10" /> {/* Увеличиваем толщину линии */}
+              <line x1="280" y1="290" x2="220" y2="420" stroke-width="10" />
             </>
           );
         case 6:
@@ -159,7 +159,7 @@ const Main = () => {
               <line x1="280" y1="230" x2="200" y2="180" stroke-width="10" />
               <line x1="280" y1="230" x2="360" y2="180" stroke-width="10" />
               <line x1="280" y1="290" x2="220" y2="420" stroke-width="10" />
-              <line x1="280" y1="290" x2="340" y2="420" stroke-width="10" /> {/* Увеличиваем толщину линии */}
+              <line x1="280" y1="290" x2="340" y2="420" stroke-width="10" />
             </>
           );
         default:
@@ -178,7 +178,12 @@ const Main = () => {
             <div className='main__info-date'>Время игры: {defeat ? stoppedTime : time}</div>
               <div className='main__info-date'>Дата игры: {currentDate}</div>
               <div className='main__info-img'>
-                <svg height="500" width="400" stroke="rgba(167, 114, 67, 1)" fill="none" strokeWidth="2">
+                <svg height="500" width="400" stroke="#fff" fill="none" strokeWidth="10">
+                  <svg><line x1="120" y1="40" x2="280" y2="40" />
+                      <line x1="280" y1="40" x2="280" y2="100" />
+                      <line x1="120" y1="40" x2="120" y2="590" />
+                      <line x1="80" y1="590" x2="200" y2="590" />
+                  </svg>
                   {renderHangman()}
                 </svg>
               </div>
