@@ -2,7 +2,8 @@ import './Main.css'
 
 import React, { useState } from 'react';
 import Layout from './Layout';
-
+import axios from "axios";
+import imageToBase64 from 'image-to-base64/browser';
 
 const Profile = () => {
   const [rating, setRating] = useState(0);
@@ -14,7 +15,7 @@ const Profile = () => {
     console.log('Изменение пароля.');
   };
 
-  const changeAvatar = (event) => {
+  const changeAvatar = async (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
 
@@ -25,8 +26,33 @@ const Profile = () => {
     if (file) {
       reader.readAsDataURL(file);
     }
+    await handleChangeAvatar();
   };
 
+  const handleChangeAvatar = async () => {
+    const base64Image = imageToBase64(avatar).then(
+      async (response) => {
+        await updateUsersProfilePicture(1, response);
+      }
+    );
+
+  }
+
+
+  const updateUsersProfilePicture = async (user_id, picture) => {
+    /**
+     * Update user's profile picture
+     * @param {number} user_id - User ID
+     * @throws {Error} If update fails
+     */
+    try {
+      const response = await axios.put(`${URL}/users/${user_id}/picture`, {
+        picture: picture,
+      });
+    } catch (error) {
+      throw new Error("Failed to update user's profile picture");
+    }
+  };
   return (
     <Layout>
       <div className="Profile">

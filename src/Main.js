@@ -1,6 +1,8 @@
 import './Main.css';
 import React, { useState, useEffect } from 'react';
 import Layout from './Layout';
+import Popup from "./components/Popup"
+import * as all from "./requests";
 
 const Main = () => {
   const [translatedWord, setTranslatedWord] = useState('');
@@ -14,6 +16,37 @@ const Main = () => {
   const [defeat, setDefeat] = useState(false);
   const [stoppedTime, setStoppedTime] = useState(0);
   const [revealedWord, setRevealedWord] = useState('');
+  const [popupMessage, setPopupMessage] = useState('');
+  const [popupIsOpen, setPopupIsOpen] = useState(false);
+
+
+  const handleRestartGame = () => {
+    setGameStarted(false);
+    setTime(0);
+    setStoppedTime(0);
+    setWord('');
+    setGuessedLetters([]);
+    setHangmanCondition(0);
+    setInputLetter('');
+    setDefeat(false);
+    setRevealedWord('');
+    setPopupIsOpen(false);
+    fetchWord();
+  };
+
+  useEffect(() => {
+    if (hangmanCondition === 7 || word === revealedWord) {
+      setPopupMessage(defeat ? 'You lost!' : 'You won!');
+      setPopupIsOpen(true);
+    }
+    else{
+      setPopupIsOpen(false);
+    }
+  }, [hangmanCondition, defeat, word, revealedWord]);
+
+  const handlePopupClose = () => {
+    setPopupIsOpen(false);
+  };
 
 
   useEffect(() => {
@@ -56,6 +89,7 @@ const Main = () => {
   
   const handleStartGame = async () => {
     setGameStarted(true);
+    setPopupIsOpen(false)
     await fetchWord();
   };
 
@@ -187,6 +221,12 @@ const Main = () => {
                   {renderHangman()}
                 </svg>
               </div>
+              <Popup
+              isOpen={popupIsOpen}
+              message={popupMessage}
+              onClose={handlePopupClose}
+              onRestart={handleRestartGame}
+            />
               <div className='main__info-title'>Слово:</div>
               <div className='main__word-container' onClick={() => document.getElementById("letter-input").focus()}>
                 <div className='word'>

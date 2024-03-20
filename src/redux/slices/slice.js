@@ -1,30 +1,118 @@
-import { createSlice } from '@reduxjs/toolkit'
+// slices/userSlice.js
 
-const initialState = {
-  value: 0,
-}
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
-export const counterSlice = createSlice({
-  name: 'counter',
-  initialState,
+const URL = "http://localhost:8080/api";
+
+export const loginUser = createAsyncThunk(
+  'user/login',
+  async ({ username, password }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(`${URL}/users/login`, {
+        username,
+        password,
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const registerUser = createAsyncThunk(
+  'user/register',
+  async ({ username, password }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(`${URL}/users/register`, {
+        username,
+        password,
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const updateUserPassword = createAsyncThunk(
+  'user/updatePassword',
+  async ({ userId, password }, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(`${URL}/users/${userId}/password`, {
+        password,
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const updateUserUsername = createAsyncThunk(
+  'user/updateUsername',
+  async ({ userId, newUsername }, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(`${URL}/users/${userId}/username`, {
+        username: newUsername,
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+const userSlice = createSlice({
+  name: 'user',
+  initialState: {
+    user: null,
+    isAuthenticated: false,
+    loading: false,
+    error: null,
+  },
   reducers: {
-    increment: (state) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.value += 1
-    },
-    decrement: (state) => {
-      state.value -= 1
-    },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload
+    logout: (state) => {
+      state.isAuthenticated = false;
+      state.user = null;
     },
   },
-})
+  extraReducers: (builder) => {
+    builder.addCase(loginUser.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(loginUser.fulfilled, (state, action) => {
+      state.loading = false;
+      state.isAuthenticated = true;
+      state.user = action.payload;
+    });
+    builder.addCase(loginUser.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(registerUser.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(registerUser.fulfilled, (state, action) => {
+      state.loading = false;
+      state.isAuthenticated = true;
+      state.user = action.payload;
+    });
+    builder.addCase(registerUser.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(updateUserPassword.fulfilled, (state, action) => {
+      state.user.password = action.payload.password;
+    });
+    builder.addCase(updateUserUsername.fulfilled, (state, action) => {
+      state.user.username = action.payload.username;
+    });
+  },
+});
 
-// Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = counterSlice.actions
+export const { logout } = userSlice.actions;
 
-export default counterSlice.reducer
+export default userSlice.reducer;
