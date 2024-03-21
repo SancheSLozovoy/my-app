@@ -55,6 +55,25 @@ form{
   pointer-events: none;
 }
 
+.animated-logo{
+  animation: logo-anim-pulsing-box-shadow 4.5s infinite ease-in-out;
+}
+
+@keyframes logo-anim-pulsing-box-shadow{
+  0%{
+    filter: drop-shadow( 0 0 0 rgba(167, 114, 67, 1));
+    scale: 1;
+  }
+  50%{
+    scale: 1.1;
+    filter: drop-shadow( 0 0 20px rgba(167, 114, 67, 0));
+  }
+  100%{
+    filter: drop-shadow( 0 0 0 rgba(167, 114, 67, 1));
+    scale: 1;
+  }
+}
+
 .App-header__form{
   margin-bottom: 35px;
 }

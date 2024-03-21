@@ -21,6 +21,9 @@ const Entrance = () => {
         username: login,
         password: password,
       });
+      if (response.status !== 200) {
+        return null;
+      }
       return response.data;
     } catch (error) {
       throw new Error("Login failed");
@@ -40,7 +43,7 @@ const Entrance = () => {
         return;
       }
       localStorage.setItem('user', JSON.stringify(r));
-      history.push("/profile")
+      history.push("/")
     }).catch((error) => {
       alert(error.message);
     });

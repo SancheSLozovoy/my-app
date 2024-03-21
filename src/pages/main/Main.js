@@ -4,9 +4,10 @@ import Layout from '../../components/layout/Layout';
 import Popup from "../../components/popup/Popup"
 import * as all from "../../requests";
 import logo from "../../assets/images/Group 1.svg";
+import TopUsers from "../../components/top-users/TopUsers";
+import axios from "axios";
 
 const Main = () => {
-  const [translatedWord, setTranslatedWord] = useState('');
   const [time, setTime] = useState(0);
   const [currentDate, setCurrentDate] = useState('');
   const [gameStarted, setGameStarted] = useState(false);
@@ -20,6 +21,8 @@ const Main = () => {
   const [popupIsOpen, setPopupIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showRules, setShowRules] = useState(false);
+  const [user, setUser] = useState({});
+  const [points, setPoints] = useState(0);
 
 
   const handleRestartGame =  () => {
@@ -30,49 +33,79 @@ const Main = () => {
       setLoading(false);
     });
   };
+  useEffect(() => {
+    const localUser = JSON.parse(localStorage.getItem('user'));
+    if (localUser) {
+      setUser(localUser);
+    }
+  }, []);
 
   useEffect(() => {
+    if (user && user.id) {
+      localStorage.setItem('user', JSON.stringify(user));
+    }
+  }, [user]);
+
+
+  useEffect(() => {
+    console.log(popupIsOpen)
+  }, [popupIsOpen]);
+
+  useEffect(() => {
+    console.log(word)
     const readLetter = async ({ key }) => {
-      console.log(key)
-      if (!popupIsOpen){
+      if (!popupIsOpen) {
         if (/[A-Za-z]$/.test(key)) {
+
+          console.log(guessedLetters)
           if (!guessedLetters.includes(key) && key.length <= 1) {
             if (!defeat) return;
             const letter = key.toLowerCase();
+            setGuessedLetters([...guessedLetters, letter]);
             if (!guessedLetters.includes(letter)) {
               if (!word.includes(letter)) {
                 setHangmanCondition(prevCondition => prevCondition + 1);
                 if (hangmanCondition === 6) {
-                  setDefeat(true);
-                  setStoppedTime(time);
-                  setRevealedWord(word);
+                  console.log("вы проиграли 2")
+                  await setDefeat(true);
+                  await setStoppedTime(time);
+                  await setRevealedWord(word);
                 }
               }
-              setGuessedLetters(prevGuessedLetters => [...prevGuessedLetters, letter]);
-            } else {
-              console.log('буква уже введена');
+            }
+            else {
+                console.log('буква уже введена');
+              }
             }
           }
         }
       }
-    };
+      if (areAllLettersPresent(word, guessedLetters) && word) {
+        console.log('win')
+        setPoints(10);
+        setPopupIsOpen(true);
+        setLoading(true);
+        setPopupMessage('You won!');
+        setRevealedWord(word);
+        setStoppedTime(time);
+        setDefeat(false);
+        window.removeEventListener("keydown", readLetter);
+    }
 
     if (hangmanCondition === 6 ) {
+      console.log('вы проиграли')
+      setPoints(-10)
       setPopupMessage(defeat ? 'You lost!' : 'You won!');
       setPopupIsOpen(true);
       setLoading(true);
       window.removeEventListener("keydown", readLetter);
     }
-    else{
-      setPopupIsOpen(false);
-    }
-
-
     window.addEventListener("keydown", readLetter);
     return () => {
       window.removeEventListener("keydown", readLetter);
     };
   }, [word, guessedLetters, defeat, hangmanCondition, popupIsOpen]);
+
 
   useEffect(() => {
     if (gameStarted) {
@@ -96,6 +129,10 @@ const Main = () => {
   };
 
   const clearGameStates = () => {
+    const localUser = JSON.parse(localStorage.getItem('user'));
+    if (localUser) {
+      setUser(localUser);
+    }
     setTime(0);
     setStoppedTime(0);
     setWord('');
@@ -106,7 +143,22 @@ const Main = () => {
     setPopupIsOpen(false);
     setPopupMessage('');
   }
+  const areAllLettersPresent = (word, typedLetters) => {
+    // Преобразуем слово в массив символов
+    const wordArray = word.split('');
 
+    // Перебираем каждую букву в слове
+    for (let i = 0; i < wordArray.length; i++) {
+      const letter = wordArray[i];
+      // Проверяем, содержится ли текущая буква в массиве набранных букв
+      if (!typedLetters.includes(letter)) {
+        // Если какая-либо буква отсутствует в массиве набранных букв, возвращаем false
+        return false;
+      }
+    }
+    // Если все буквы из слова содержатся в массиве набранных букв, возвращаем true
+    return true;
+  }
   useEffect(() => {
     updateCurrentDate();
   }, []);
@@ -130,6 +182,8 @@ const Main = () => {
       setWord(newWord);
     } catch (error) {
       console.error('Ошибка при получении слова:', error);
+      alert('Ошибка при получении слова');
+      handleBack();
     }
   };
 
@@ -220,7 +274,7 @@ const Main = () => {
       <div className="Main">
         {!gameStarted && (<div className={"menu-group"}>
 
-          <img src={logo} className="App-header__img" alt="logo"/>
+          <img src={logo} className="App-header__img animated-logo" alt="logo"/>
           <h1 className="App-header__title">Sigma - Hangman</h1>
           <p>Проверьте свою смекалку и знания английского!</p>
           <button className='start__button' onClick={handleStartGame}>Начать</button>
@@ -250,7 +304,7 @@ const Main = () => {
                   {renderHangman()}
                 </svg>
               </div>
-              <div className='main__info-title'>Слово:</div>
+              <div className='main__info- title'>Слово:</div>
               <div className='main__word-container'>
                 <div className='word'>
                   {renderWord()}
@@ -273,11 +327,18 @@ const Main = () => {
                     word={word}
                     onClose={handlePopupClose}
                     onRestart={handleRestartGame}
+                    user_id={user.id}
+                    points={points}
+                    rating={user.rating}
+                    username={user.username}
+                    time={time}
+                    defeat={defeat}
                 />
               )}
             </>
       )}
       </div>
+      <TopUsers/>
     </Layout>
   );
 };

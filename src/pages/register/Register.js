@@ -43,8 +43,7 @@ const Register = () => {
           if (password !== confirmPassword) {
             setPasswordError('Пароли не совпадают');
           } else {
-            window.localStorage.setItem('user', JSON.stringify(data));
-            history.push('/profile');
+            history.push('/login');
           }
         })
         .catch(error => console.error('Error:', error));
