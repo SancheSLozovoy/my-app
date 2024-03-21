@@ -2,7 +2,6 @@ import './Main.css';
 import React, { useState, useEffect } from 'react';
 import Layout from '../../components/layout/Layout';
 import Popup from "../../components/popup/Popup"
-import * as all from "../../requests";
 import logo from "../../assets/images/Group 1.svg";
 import TopUsers from "../../components/top-users/TopUsers";
 import axios from "axios";

@@ -127,6 +127,8 @@ body::before {
 .body__info-button-password, .body__info-button-logout, .body__info-button-logout {
     display: flex;
     font-size: 18px;
+    min-width: 300px;
+    text-align: center;
     justify-content: space-between;
     align-items: center;
     gap: 2rem;
