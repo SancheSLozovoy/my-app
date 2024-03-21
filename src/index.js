@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom'; // Добавляе�
 import App from './App';
 import { store } from './redux/store'
 import { Provider } from 'react-redux'
+import './axios.config'
 
 
 import reportWebVitals from './reportWebVitals';

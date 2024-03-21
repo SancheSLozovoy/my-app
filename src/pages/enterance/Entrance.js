@@ -1,12 +1,31 @@
 // Entrance.js
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; 
-import logo from './Group 1.svg';
+import {Link, useHistory} from 'react-router-dom';
+import logo from '../../assets/images/Group 1.svg';
 import './Entrance.css';
+import axios from "axios";
 
 const Entrance = () => {
+  const history = useHistory();
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+
+  const loginRequest = async () => {
+    /**
+     * Login a user
+     * @returns {Object} Response data
+     * @throws {Error} If login fails
+     */
+    try {
+      const response = await axios.post('/users/login', {
+        username: login,
+        password: password,
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error("Login failed");
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,9 +34,17 @@ const Entrance = () => {
       alert('Пожалуйста, заполните все поля');
       return;
     }
+    loginRequest().then((r) => {
+      if (!r) {
+        alert('Неверный логин или пароль');
+        return;
+      }
+      localStorage.setItem('user', JSON.stringify(r));
+      history.push("/profile")
+    }).catch((error) => {
+      alert(error.message);
+    });
 
-    // Если все поля заполнены, можно переходить в профиль
-    window.location.href = '/profile';
   };
 
   return (

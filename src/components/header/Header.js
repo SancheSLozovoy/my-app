@@ -1,8 +1,8 @@
 // Header.js
 import React from 'react';
 import './Header.css'
-import logo from '../Group 2.svg';
-import acc from '../Account.svg';
+import logo from '../../assets/images/Group 2.svg';
+import acc from '../../assets/images/Account.svg';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
@@ -11,10 +11,10 @@ const Header = () => {
       <nav className='header__nav'>
         <ul className='header__ul'>
           <li className='header__li'>
-            <Link to="/main"><img src={logo} alt="logo" /></Link>
+            <Link to="/"><img src={logo} alt="logo" /></Link>
           </li>
           <li className='header__li'>
-            <Link to="/profile"><img src={acc} alt="account" /></Link>
+            <Link to={window.localStorage.getItem('user') ? "/profile" : "/login"}><img src={acc} alt="account" /></Link>
           </li>
         </ul>
       </nav>

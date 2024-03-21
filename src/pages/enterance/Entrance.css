@@ -1,16 +1,16 @@
 @font-face {
   font-family: 'Jost';
-  src: url('../font/static/Jost-Regular.ttf');
+  src: url('../../../font/static/Jost-Regular.ttf');
 }
 
 @font-face {
   font-family: 'JostL';
-  src: url('../font/static/Jost-Light.ttf');
+  src: url('../../../font/static/Jost-Light.ttf');
 }
 
 @font-face {
   font-family: 'JostB';
-  src: url('../font/static/Jost-Bold.ttf');
+  src: url('../../../font/static/Jost-Bold.ttf');
 }
 
 #root{
