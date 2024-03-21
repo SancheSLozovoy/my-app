@@ -1,15 +1,17 @@
-import './Main.css'
+import '../main/Main.css'
 
-import React, { useState } from 'react';
-import Layout from './Layout';
+import React, {useEffect, useState} from 'react';
+import Layout from '../../components/layout/Layout';
 import axios from "axios";
 import imageToBase64 from 'image-to-base64/browser';
+import {useHistory} from "react-router-dom";
 
 const Profile = () => {
-  const [rating, setRating] = useState(0);
-  const [login, setLogin] = useState(''); 
-  const [registrationDate, setRegistrationDate] = useState(''); 
-  const [avatar, setAvatar] = useState(''); 
+  const [rating] = useState(0);
+  const [login] = useState('');
+  const [registrationDate] = useState('');
+  const [avatar, setAvatar] = useState('');
+
 
   const changePassword = () => {
     console.log('Изменение пароля.');
@@ -61,7 +63,7 @@ const Profile = () => {
             <div className='body__info-rating'>
               Рейтинг: {rating}
             </div>
-            <div className='body__info-img'>
+            <div className='body__info-img-container'>
               <img src={avatar} className='body__info-img'/>
             </div>
             <label htmlFor="avatarInput" className="body__info-button">
